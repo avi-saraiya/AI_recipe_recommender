@@ -20,17 +20,26 @@ def map_class_to_label(class_index):
     return predicted_class_label
 
 #Usage
-if __name__ == "__main__":
+def name_ingredient():
     user_input = ""
+    ingredient = ""
     image_path = "orange.png"
-    while (user_input.lower() != "end" and user_input.lower() != "yes"):
-        try:
-            image_path = input("Please enter the path of the image you want to identify\n")
-            class_index = predict_class(image_path)
-            class_label = map_class_to_label(class_index)
-            print(f"Predicted class index: {class_index}")
-            print(f"Predicted class label: {class_label}")
-        except FileNotFoundError:
-            print("File was not found")
-        user_input = input("End program?\n")
+    try:
+        image_path = input("Please enter the path of the image you want to identify\n")
+        class_index = predict_class(image_path)
+        class_label = map_class_to_label(class_index)
+        print(f"Predicted class index: {class_index}")
+        print(f"Predicted class label: {class_label}")
+        ingredient = class_label
+    except FileNotFoundError:
+        print("File was not found")
+    if ingredient == "":
+        print("This is the ingredient : " + ingredient)
+        return "No ingredient found"
+    else:
+        print("The ingredient is : " + ingredient)
+        return ingredient
+
+if __name__ == "__main__":
+    name_ingredient()
 
