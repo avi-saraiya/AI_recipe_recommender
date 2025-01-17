@@ -21,6 +21,8 @@ def map_class_to_label(class_index):
 
 #Usage
 def name_ingredient():
+    # To generalize specific foods
+    generalize = {"Granny_Smith": "apple"} # Add to this as seen fit
     user_input = ""
     ingredient = ""
     image_path = "orange.png"
@@ -30,6 +32,8 @@ def name_ingredient():
         class_label = map_class_to_label(class_index)
         print(f"Predicted class index: {class_index}")
         print(f"Predicted class label: {class_label}")
+        if class_label in generalize:
+            class_label = generalize[class_label]
         ingredient = class_label
     except FileNotFoundError:
         print("File was not found")

@@ -25,3 +25,4 @@ def predict_class(image_path):
     
     _, predicted_class = torch.max(output, 1)
     return predicted_class.item()  # Returns the required class index
+
