@@ -1,14 +1,38 @@
+import openai
 from index_mapper import name_ingredient
 
-test_dataset = [{"dish_name": "Fruit salad", "test_ingredients": ["apple", "orange"], "cuisine": "international"}]
+# Replace with your OpenAI API key
+openai.api_key = "enter_your_API_key"
 
-def check_dataset():
+def recommend_dish(ingredient):
+    try:
+        # Formulate the chat message for the model
+        messages = [ #This is to establish the context of the conversation for the AI model
+            {"role": "system", "content": "You are a helpful chef who suggests dishes based on ingredients."},
+            {"role": "user", "content": f"I have the ingredient '{ingredient}'. Can you suggest some dishes I can make with it?"}
+        ]
+
+        # Call the OpenAI API using the GPT model
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo",
+            messages=messages,
+            max_tokens=150,
+            temperature=0.7 # This is a scale out of 1.0 where 1 is the maximum degree of creativity, and 0 is the maximum preciseness
+        )
+
+        # Extract and print the response
+        suggestions = response['choices'][0]['message']['content'].strip()
+        print("\nRecommended dishes:")
+        print(suggestions)
+        return suggestions
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+        return None
+
+def main():
     ingredient = name_ingredient()
-    for dish in test_dataset:
-        if ingredient in dish["test_ingredients"]:
-            print("You could make : " + dish["dish_name"])
-        else:
-            print ("dish not found")
+    if ingredient and ingredient != "No ingredient found":
+        recommend_dish(ingredient)
 if __name__ == "__main__":
-    check_dataset()
-
+    main()
