@@ -1,18 +1,18 @@
 import openai
 from index_mapper import name_ingredient
 
-# Replace with your OpenAI API key
-openai.api_key = "enter_your_API_key"
+# Replace with YOUR OpenAI API key
+openai.api_key = "Enter your API key"
+
 
 def recommend_dish(ingredient):
     try:
-        # Formulate the chat message for the model
-        messages = [ #This is to establish the context of the conversation for the AI model
+        messages = [ # This is to establish the context of the conversation for the AI model
             {"role": "system", "content": "You are a helpful chef who suggests dishes based on ingredients."},
             {"role": "user", "content": f"I have the ingredient '{ingredient}'. Can you suggest some dishes I can make with it?"}
         ]
 
-        # Call the OpenAI API using the GPT model
+        # Calls the AI model
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo",
             messages=messages,
