@@ -4,12 +4,11 @@ from index_mapper import name_ingredient
 # Replace with YOUR OpenAI API key
 openai.api_key = "Enter your API key"
 
-
 def recommend_dish(ingredient):
     try:
         messages = [ # This is to establish the context of the conversation for the AI model
             {"role": "system", "content": "You are a helpful chef who suggests dishes based on ingredients."},
-            {"role": "user", "content": f"I have the ingredient '{ingredient}'. Can you suggest some dishes I can make with it?"}
+            {"role": "user", "content": f"I have the ingredients '{ingredient}'. Can you suggest some dishes I can make with it?"}
         ]
 
         # Calls the AI model
